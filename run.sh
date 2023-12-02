@@ -1,1 +1,3 @@
-export FLASK_APP=app/index.py
+source venv/bin/activate
+export FLASK_APP='app.py'
+flask run
