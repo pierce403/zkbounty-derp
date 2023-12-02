@@ -1,7 +1,12 @@
-import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+
+import React, { useState, useEffect } from 'react';
+import { ThemeProvider } from '@mui/material/styles';
+import theme from './theme';
+
 import BountyTable from './BountyTable';
 import BountyDetails from './BountyDetails';
+import './styles/GlobalStyles.css';
 
 function App() {
   const [bounties, setBounties] = useState([]);
@@ -23,10 +28,12 @@ function App() {
   };
 
   return (
+    <ThemeProvider theme={theme}>
     <div>
       <BountyTable bounties={bounties} onExpand={handleExpand} />
       {currentBounty && <BountyDetails bounty={currentBounty} />}
     </div>
+    </ThemeProvider>
   );
 }
 
