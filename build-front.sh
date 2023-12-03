@@ -3,6 +3,6 @@ npm run build
 git rm ../frontend/* ../static/*
 cp -v build/* ../frontend
 cp -rv build/static/* ../static
-cd -v ..
+cd ..
 git add frontend
 git add static
