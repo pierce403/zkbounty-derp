@@ -14,3 +14,12 @@ body {
 .bounty-row:hover {
   background-color: #142c47; /* Darker on hover */
 }
+
+.bounty-table-container {
+  margin: auto;
+  max-width: 80%; /* Adjust as needed */
+  padding: 20px;
+  background-color: #1e2a3a; /* Example color */
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
