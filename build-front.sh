@@ -1,8 +1,7 @@
-cd client
-npm run build
-git rm ../frontend/* ../static/*
-cp -v build/* ../frontend
-cp -rv build/static/* ../static
-cd ..
-git add frontend
-git add static
+#!/usr/bin/env bash
+set -euo pipefail
+
+repo_root="$(cd "$(dirname "$0")" && pwd)"
+npm --prefix "$repo_root/client" run build
+rm -rf "$repo_root/frontend" "$repo_root/static"
+cp -R "$repo_root/client/dist" "$repo_root/frontend"

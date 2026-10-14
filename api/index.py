@@ -1,8 +1,9 @@
 from flask import Flask, send_from_directory, jsonify
-import os
+from pathlib import Path
 
 #app = Flask(__name__, static_folder='potato' )
 app = Flask(__name__)
+FRONTEND_DIR = Path(__file__).resolve().parents[1] / 'frontend'
 
 # Mock data for bounties
 bounties = [
@@ -48,12 +49,12 @@ def get_bounties():
 @app.route('/<path:path>')
 def serve(path):
     print("path:   " + path)
-    if path != "" and os.path.exists('frontend' + '/' + path):
+    if path != "" and (FRONTEND_DIR / path).is_file():
         print('path exists')
-        return send_from_directory('frontend', path)
+        return send_from_directory(FRONTEND_DIR, path)
     else:
         print('path does not exist')
-        return send_from_directory('frontend' , 'index.html')
+        return send_from_directory(FRONTEND_DIR, 'index.html')
 
 if __name__ == '__main__':
     app.run()
