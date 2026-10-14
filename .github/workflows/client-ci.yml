@@ -23,9 +23,11 @@ jobs:
       - run: npm ci
       - run: npm audit --audit-level=low
       - run: npm run build
+      - run: ./scripts/test-check-generated-frontend.sh
+        working-directory: .
       - run: ./build-front.sh
         working-directory: .
-      - run: git diff --exit-code -- frontend static
+      - run: ./scripts/check-generated-frontend.sh
         working-directory: .
       - run: npx playwright install --with-deps chromium
       - run: npm run test:e2e
