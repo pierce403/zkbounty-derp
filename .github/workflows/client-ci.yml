@@ -1,0 +1,31 @@
+name: Client CI
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-smoke:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: client
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: client/package-lock.json
+      - run: npm ci
+      - run: npm audit --audit-level=low
+      - run: npm run build
+      - run: ./build-front.sh
+        working-directory: .
+      - run: git diff --exit-code -- frontend static
+        working-directory: .
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e
