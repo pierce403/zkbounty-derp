@@ -3,6 +3,14 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
+  build: {
+    license: { fileName: 'THIRD_PARTY_LICENSES.md' },
+    rolldownOptions: {
+      output: {
+        postBanner: '/* Bundled dependency licenses: /THIRD_PARTY_LICENSES.md */',
+      },
+    },
+  },
   server: {
     proxy: {
       '/api': 'http://127.0.0.1:5000',
